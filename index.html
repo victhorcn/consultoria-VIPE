@@ -1,618 +1,923 @@
-            .hero-left {
-                padding: 60px 20px 48px;
-            }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultoria VIPE — Do Quartel à Elite</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* CORES PRINCIPAIS */
+  --bg:#040608;
+  --c1:#080d0f;--c2:#0d1518;--c3:#162028;--c4:#1e2e38;
+  --petroleo:#1a6b5a;--pl:#22897a;--pd:#0f3d33;--pa:rgba(26,107,90,.12);--pb:rgba(26,107,90,.3);
+  --branco:#edf2f0;--b1:#c8d4d0;--b2:#8fa89f;--b3:#4a6058;--b4:#243028;
+  --acc:#e8f5f0;
+  /* TIPOGRAFIA */
+  --sans:'Barlow',sans-serif;
+  --cond:'Barlow Condensed',sans-serif;
+  --disp:'Bebas Neue',sans-serif;
+}
 
-            .wrap {
-                padding: 0 20px;
-            }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 
-            .nav {
-                padding: 0 20px;
-            }
+body{
+  background:var(--bg);
+  color:var(--branco);
+  font-family:var(--sans);
+  line-height:1.7;
+  overflow-x:hidden;
+}
 
-            .nav-links {
-                display: none;
-            }
+/* ─── GRAIN ─── */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  opacity:.6;mix-blend-mode:overlay;
+}
 
-            .method-grid {
-                grid-template-columns: 1fr;
-            }
+/* ─── BARRA TOPO ─── */
+.topo{
+  background:var(--petroleo);
+  padding:10px 24px;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  font-family:var(--cond);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:#000;font-weight:700;
+}
+.topo-dot{width:6px;height:6px;border-radius:50%;background:#000;opacity:.4;}
 
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
+/* ─── NAV ─── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(4,6,8,.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(26,107,90,.2);
+  padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:var(--disp);font-size:20px;
+  letter-spacing:3px;color:var(--pl);
+  padding:14px 0;
+}
+.nav-links{display:flex;gap:0;}
+.nav-link{
+  font-family:var(--cond);font-size:9px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--b3);
+  padding:16px 16px;text-decoration:none;
+  border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+.nav-link:hover{color:var(--pl);border-bottom-color:var(--petroleo);}
+.nav-cta{
+  font-family:var(--cond);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  background:var(--petroleo);color:#000;font-weight:700;
+  padding:10px 20px;text-decoration:none;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--pl);}
 
-            .modal-content {
-                width: 95%;
-                padding: 24px;
-            }
+/* ─── HERO ─── */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
 
-            .price {
-                font-size: 60px;
-            }
+/* coluna esquerda */
+.hero-left{
+  background:var(--bg);
+  padding:100px 64px 80px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:1;
+}
+.hero-left::after{
+  content:'';
+  position:absolute;right:0;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,transparent,var(--petroleo) 20%,var(--petroleo) 80%,transparent);
+}
 
-            .quote-section {
-                padding: 32px 24px;
-            }
+/* coluna direita — foto / visual */
+.hero-right{
+  background:var(--c1);
+  position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+.hero-right-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%,rgba(26,107,90,.15) 0%,transparent 60%),
+    linear-gradient(180deg,var(--c1) 0%,var(--c2) 100%);
+}
+.hero-foto-placeholder{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;
+}
+.hfp-icon{font-size:48px;opacity:.15;}
+.hfp-txt{
+  font-family:var(--cond);font-size:10px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--b3);text-align:center;
+  max-width:200px;line-height:1.6;
+}
+/* quando tiver foto — substitua o placeholder por: */
+/* .hero-right img{width:100%;height:100%;object-fit:cover;object-position:top center;} */
 
-            .quote-text {
-                font-size: 28px;
-            }
-        }
+.hero-right-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--bg) 0%,transparent 30%);
+}
+.hero-numeros-lateral{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:0;
+  border-left:1px solid rgba(26,107,90,.25);
+}
+.hnl{padding:20px 24px;border-bottom:1px solid rgba(26,107,90,.15);}
+.hnl:last-child{border-bottom:none;}
+.hnl-n{font-family:var(--disp);font-size:32px;color:var(--pl);line-height:1;display:block;}
+.hnl-l{font-family:var(--cond);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--b3);display:block;margin-top:3px;line-height:1.4;}
 
-        /* ANIMATIONS */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+/* HERO CONTEÚDO */
+.hero-label{
+  font-family:var(--cond);font-size:10px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--petroleo);
+  margin-bottom:24px;display:flex;align-items:center;gap:12px;
+}
+.hero-label::before{content:'';width:28px;height:2px;background:var(--petroleo);}
 
-        .hero-label {
-            animation: fadeUp .5s ease both;
-        }
+.hero-h1{
+  font-family:var(--disp);
+  font-size:clamp(56px,6.5vw,96px);
+  line-height:.86;letter-spacing:1px;
+  margin-bottom:10px;
+}
+.h1a{color:var(--branco);display:block;}
+.h1b{color:var(--petroleo);display:block;}
+.h1c{
+  color:transparent;display:block;
+  -webkit-text-stroke:1px rgba(237,242,240,.15);
+  letter-spacing:3px;font-size:.5em;margin-top:8px;
+}
 
-        .hero-h1 {
-            animation: fadeUp .6s .08s ease both;
-        }
+.hero-desc{
+  font-size:15px;color:var(--b1);
+  line-height:1.8;max-width:480px;
+  margin:28px 0 40px;
+}
+.hero-desc strong{color:var(--branco);}
+.hero-desc em{color:var(--pl);font-style:normal;}
 
-        .hero-desc {
-            animation: fadeUp .6s .16s ease both;
-        }
+/* BTN */
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--disp);font-size:18px;letter-spacing:2px;
+  padding:18px 36px;text-decoration:none;cursor:pointer;border:none;
+  transition:transform .15s,background .2s;
+  position:relative;overflow:hidden;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
+  transform:translateX(-100%);transition:transform .4s;
+}
+.btn:hover::before{transform:translateX(100%);}
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:translateY(0);}
+.btn-primary{background:var(--petroleo);color:var(--branco);}
+.btn-primary:hover{background:var(--pl);}
+.btn-ghost{
+  background:transparent;color:var(--b2);
+  border:1px solid var(--c3);font-size:14px;padding:14px 28px;
+}
+.btn-ghost:hover{border-color:var(--petroleo);color:var(--pl);}
 
-        .hero-cta-group {
-            animation: fadeUp .6s .24s ease both;
-        }
+.hero-cta-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.hero-cta-sub{font-family:var(--cond);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--b3);margin-top:14px;line-height:1.7;}
+.hero-cta-sub strong{color:var(--petroleo);}
 
-        .hero-cta-sub {
-            animation: fadeUp .6s .32s ease both;
-        }
-    </style>
+/* ─── UTILS ─── */
+.wrap{max-width:1080px;margin:0 auto;padding:0 56px;}
+.pad{padding:96px 0 80px;}
+.pad-sm{padding:64px 0 52px;}
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(26,107,90,.25),transparent);}
+
+.sec-label{
+  font-family:var(--cond);font-size:10px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--petroleo);
+  margin-bottom:10px;display:flex;align-items:center;gap:12px;
+}
+.sec-label::before{content:'';width:20px;height:2px;background:var(--petroleo);}
+
+.sec-titulo{
+  font-family:var(--disp);
+  font-size:clamp(38px,4.5vw,68px);
+  line-height:.9;letter-spacing:1px;margin-bottom:32px;
+}
+.sec-titulo em{color:var(--petroleo);font-style:normal;}
+.sec-titulo span{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(237,242,240,.15);
+}
+
+/* ─── FRASE CENTRAL ─── */
+.frase-bloco{
+  background:var(--petroleo);
+  padding:56px 64px;
+  position:relative;overflow:hidden;
+}
+.frase-bloco::before{
+  content:'"';
+  position:absolute;left:-20px;top:-40px;
+  font-family:var(--disp);font-size:260px;
+  color:rgba(0,0,0,.15);line-height:1;pointer-events:none;
+}
+.frase-bloco-txt{
+  font-family:var(--disp);
+  font-size:clamp(32px,4vw,60px);
+  color:#000;line-height:1;letter-spacing:1px;
+  position:relative;z-index:1;
+  max-width:800px;
+}
+.frase-bloco-origem{
+  font-family:var(--cond);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(0,0,0,.5);
+  margin-top:20px;position:relative;z-index:1;
+}
+
+/* ─── PROBLEMA ─── */
+.prob-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(26,107,90,.15);
+  border:1px solid rgba(26,107,90,.2);
+}
+.prob-item{
+  background:var(--c1);padding:28px 30px;
+  display:flex;gap:18px;align-items:flex-start;
+  transition:background .2s;
+}
+.prob-item:hover{background:var(--c2);}
+.prob-marca{
+  width:3px;min-height:100%;background:var(--petroleo);
+  opacity:.4;flex-shrink:0;border-radius:2px;
+}
+.prob-corpo{}
+.prob-titulo{
+  font-family:var(--cond);font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:.5px;
+  color:var(--branco);margin-bottom:6px;
+}
+.prob-desc{font-size:13.5px;color:var(--b2);line-height:1.7;}
+
+/* ─── HISTÓRIA ─── */
+.historia-wrap{
+  display:grid;grid-template-columns:1fr 400px;gap:80px;
+  align-items:start;
+}
+.historia-p{
+  font-size:15px;color:var(--b1);line-height:1.95;
+  margin-bottom:20px;
+  border-bottom:1px solid var(--c3);padding-bottom:20px;
+}
+.historia-p:last-child{border-bottom:none;margin-bottom:0;}
+.historia-p strong{color:var(--branco);}
+.historia-p em{color:var(--pl);font-style:normal;}
+
+.aside-numeros{
+  position:sticky;top:80px;
+  border:1px solid rgba(26,107,90,.2);overflow:hidden;
+}
+.an-header{
+  background:var(--petroleo);
+  padding:16px 20px;
+  font-family:var(--cond);font-weight:700;font-size:10px;
+  letter-spacing:4px;text-transform:uppercase;color:#000;
+}
+.an-item{
+  padding:16px 20px;
+  border-bottom:1px solid rgba(26,107,90,.1);
+  display:flex;align-items:center;gap:16px;
+  background:var(--c1);
+  transition:background .2s;
+}
+.an-item:hover{background:var(--c2);}
+.an-item:last-child{border-bottom:none;}
+.an-num{
+  font-family:var(--disp);font-size:36px;
+  color:var(--petroleo);line-height:1;flex-shrink:0;min-width:72px;
+}
+.an-info{}
+.an-titulo{font-size:13px;color:var(--branco);font-weight:600;line-height:1.3;margin-bottom:2px;}
+.an-sub{font-size:11px;color:var(--b3);letter-spacing:.5px;}
+
+/* ─── MÉTODO VIPE ─── */
+.vipe-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid rgba(26,107,90,.2);overflow:hidden;
+}
+.vipe-pilar{
+  padding:36px 24px;text-align:center;
+  border-right:1px solid rgba(26,107,90,.15);
+  background:var(--c1);transition:background .2s;
+  position:relative;overflow:hidden;
+}
+.vipe-pilar:last-child{border-right:none;}
+.vipe-pilar:hover{background:var(--c2);}
+.vipe-pilar::before{
+  content:attr(data-letra);
+  position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);
+  font-family:var(--disp);font-size:120px;
+  color:rgba(26,107,90,.05);line-height:1;pointer-events:none;
+}
+.vp-letra{
+  font-family:var(--disp);font-size:72px;line-height:1;
+  display:block;margin-bottom:10px;
+  color:var(--petroleo);
+}
+.vp-nome{
+  font-family:var(--cond);font-weight:700;font-size:14px;
+  text-transform:uppercase;letter-spacing:1px;
+  color:var(--branco);display:block;margin-bottom:8px;
+}
+.vp-desc{font-size:12.5px;color:var(--b3);line-height:1.65;}
+
+/* ─── SESSÃO — O QUE ACONTECE ─── */
+.steps{border:1px solid rgba(26,107,90,.2);overflow:hidden;}
+.step-item{
+  display:grid;grid-template-columns:72px 1fr;
+  border-bottom:1px solid rgba(26,107,90,.08);
+  background:var(--c1);transition:background .2s;
+}
+.step-item:hover{background:var(--c2);}
+.step-item:last-child{border-bottom:none;}
+.step-n{
+  font-family:var(--disp);font-size:40px;
+  color:rgba(26,107,90,.2);
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid rgba(26,107,90,.08);
+  background:rgba(26,107,90,.03);
+}
+.step-body{padding:20px 24px;}
+.step-t{
+  font-family:var(--cond);font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:.5px;
+  color:var(--branco);margin-bottom:4px;
+}
+.step-d{font-size:13px;color:var(--b3);line-height:1.65;}
+
+/* ─── PARA QUEM ─── */
+.quem-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(26,107,90,.2);}
+.quem-col{background:var(--c1);}
+.quem-col-header{
+  padding:16px 24px;
+  font-family:var(--cond);font-weight:700;font-size:11px;
+  letter-spacing:3px;text-transform:uppercase;
+  border-bottom:1px solid rgba(26,107,90,.15);
+}
+.quem-col-header.sim{color:var(--pl);background:rgba(26,107,90,.08);}
+.quem-col-header.nao{color:#e05c4a;background:rgba(192,57,43,.06);}
+.quem-col:last-child{border-left:1px solid rgba(26,107,90,.15);}
+.quem-items{padding:8px 0;}
+.qi{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 24px;font-size:13.5px;color:var(--b2);line-height:1.6;
+  border-bottom:1px solid rgba(26,107,90,.05);
+}
+.qi:last-child{border-bottom:none;}
+.qi.s::before{content:'✓';color:var(--pl);flex-shrink:0;margin-top:2px;font-size:12px;font-weight:700;}
+.qi.n::before{content:'✕';color:#e05c4a;flex-shrink:0;margin-top:2px;font-size:12px;}
+
+/* ─── DEPOIMENTOS ─── */
+.dep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,107,90,.15);}
+.dep-card{
+  background:var(--c1);padding:32px 26px;
+  position:relative;overflow:hidden;
+}
+.dep-card::after{
+  content:'"';position:absolute;right:12px;top:-8px;
+  font-family:var(--disp);font-size:80px;
+  color:rgba(26,107,90,.1);line-height:1;pointer-events:none;
+}
+.dep-texto{font-size:14px;color:var(--b1);line-height:1.85;font-style:italic;margin-bottom:20px;}
+.dep-autor{display:flex;align-items:center;gap:12px;}
+.dep-av{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pd),var(--petroleo));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-size:17px;color:var(--pl);
+  flex-shrink:0;border:1px solid rgba(26,107,90,.3);
+}
+.dep-nome{font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--branco);display:block;}
+.dep-detalhe{font-size:11px;color:var(--b3);display:block;margin-top:2px;}
+
+.dep-placeholder{
+  background:var(--c2);
+  border:1px dashed rgba(26,107,90,.2);
+  padding:32px 26px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;min-height:200px;text-align:center;
+}
+.dp-icon{font-size:24px;opacity:.2;}
+.dp-txt{font-size:11.5px;color:var(--b3);line-height:1.65;max-width:180px;}
+
+/* ─── PROVA SOCIAL ─── */
+.prova-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(26,107,90,.15);margin-top:1px;}
+.prova-item{
+  background:var(--c1);padding:24px 28px;
+  border-left:3px solid var(--petroleo);
+}
+.prova-titulo{font-family:var(--cond);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--branco);margin-bottom:6px;}
+.prova-desc{font-size:13px;color:var(--b2);line-height:1.75;}
+.prova-resultado{
+  margin-top:10px;padding:6px 12px;
+  background:rgba(26,107,90,.1);border:1px solid rgba(26,107,90,.25);
+  font-size:11px;color:var(--pl);font-weight:600;font-family:var(--cond);letter-spacing:1px;text-transform:uppercase;
+  display:inline-block;
+}
+
+/* ─── ENTREGÁVEIS ─── */
+.entrega-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,107,90,.15);}
+.entrega-item{
+  background:var(--c1);padding:28px 24px;text-align:center;
+  transition:background .2s;
+}
+.entrega-item:hover{background:var(--c2);}
+.ei-icon{font-size:28px;display:block;margin-bottom:12px;}
+.ei-titulo{font-family:var(--cond);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--branco);margin-bottom:6px;}
+.ei-desc{font-size:12.5px;color:var(--b3);line-height:1.6;}
+
+/* ─── FAQ ─── */
+.faq{border:1px solid rgba(26,107,90,.2);overflow:hidden;}
+.faq-item{border-bottom:1px solid rgba(26,107,90,.08);background:var(--c1);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{
+  padding:20px 24px;
+  font-family:var(--cond);font-weight:700;font-size:14px;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--branco);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  user-select:none;transition:background .2s;
+}
+.faq-q:hover{background:var(--c2);}
+.faq-q::after{
+  content:'+';color:var(--petroleo);font-size:24px;
+  font-family:var(--sans);font-weight:300;flex-shrink:0;
+  transition:transform .25s;
+}
+.faq-item.open .faq-q::after{transform:rotate(45deg);}
+.faq-a{
+  max-height:0;overflow:hidden;
+  font-size:13.5px;color:var(--b2);line-height:1.8;
+  padding:0 24px;transition:max-height .3s ease,padding .3s ease;
+}
+.faq-item.open .faq-a{max-height:220px;padding:0 24px 20px;}
+
+/* ─── CTA FINAL ─── */
+.cta-final{
+  background:var(--c1);
+  border-top:1px solid rgba(26,107,90,.2);
+  padding:100px 56px;
+  position:relative;overflow:hidden;
+}
+.cta-final::before{
+  content:'VIPE';
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:var(--disp);font-size:clamp(150px,20vw,280px);
+  color:rgba(26,107,90,.04);letter-spacing:10px;white-space:nowrap;
+  pointer-events:none;
+}
+.cta-inner{
+  position:relative;z-index:1;
+  max-width:720px;margin:0 auto;text-align:center;
+}
+.cta-label{
+  font-family:var(--cond);font-size:10px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--petroleo);margin-bottom:16px;
+}
+.cta-h2{
+  font-family:var(--disp);
+  font-size:clamp(44px,6vw,88px);
+  line-height:.88;letter-spacing:1px;
+  color:var(--branco);margin-bottom:20px;
+}
+.cta-h2 em{color:var(--petroleo);font-style:normal;display:block;}
+.cta-p{font-size:15px;color:var(--b2);line-height:1.8;margin-bottom:44px;max-width:540px;margin-left:auto;margin-right:auto;}
+.cta-p strong{color:var(--branco);}
+
+.cta-box{
+  background:var(--bg);
+  border:1px solid rgba(26,107,90,.3);
+  padding:40px 44px;max-width:500px;margin:0 auto;
+}
+.cta-preco-label{
+  font-family:var(--cond);font-size:10px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--b3);margin-bottom:4px;
+}
+.cta-preco{
+  font-family:var(--disp);font-size:80px;
+  color:var(--petroleo);line-height:1;display:block;margin-bottom:4px;
+}
+.cta-preco-desc{font-size:13px;color:var(--b3);margin-bottom:28px;line-height:1.6;}
+.cta-vagas{font-size:12px;color:#e05c4a;font-weight:700;margin-top:16px;letter-spacing:1px;}
+.cta-garantia{font-size:11px;color:var(--b3);margin-top:6px;line-height:1.6;}
+
+/* ─── FOOTER ─── */
+.footer{
+  background:var(--bg);
+  border-top:1px solid rgba(26,107,90,.15);
+  padding:48px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-brand{font-family:var(--disp);font-size:18px;color:var(--petroleo);letter-spacing:3px;}
+.footer-txt{font-family:var(--cond);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--b3);}
+
+/* ─── RESPONSIVO ─── */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{padding:80px 32px 60px;}
+  .wrap{padding:0 32px;}
+  .historia-wrap{grid-template-columns:1fr;}
+  .aside-numeros{position:static;}
+  .vipe-grid{grid-template-columns:1fr 1fr;}
+  .dep-grid{grid-template-columns:1fr;}
+  .quem-grid{grid-template-columns:1fr;}
+  .entrega-grid{grid-template-columns:1fr 1fr;}
+  .footer{flex-direction:column;gap:12px;text-align:center;padding:36px 24px;}
+  .cta-final{padding:72px 32px;}
+  .cta-box{padding:28px 24px;}
+  .prob-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .hero-left{padding:60px 20px 48px;}
+  .wrap{padding:0 20px;}
+  .nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .vipe-grid{grid-template-columns:1fr 1fr;}
+  .entrega-grid{grid-template-columns:1fr;}
+  .prova-grid{grid-template-columns:1fr;}
+  .frase-bloco{padding:40px 28px;}
+}
+
+/* ─── ANIMAÇÕES ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-label{animation:fadeUp .5s ease both;}
+.hero-h1{animation:fadeUp .6s .08s ease both;}
+.hero-desc{animation:fadeUp .6s .16s ease both;}
+.hero-cta-group{animation:fadeUp .6s .24s ease both;}
+.hero-cta-sub{animation:fadeUp .6s .32s ease both;}
+</style>
 </head>
-
 <body>
-    <!-- TOPBAR -->
-    <div class="topbar">
-        <span>⚡ 75 minutos · Protocolo de 90 dias · Resultado garantido</span>
-        <div class="topbar-dot"></div>
-        <span>Vagas limitadas a 30/mês</span>
+
+<!-- BARRA TOPO -->
+<div class="topo">
+  <span>⚡ 30 vagas por mês</span>
+  <div class="topo-dot"></div>
+  <span>Novas vagas toda primeira segunda-feira</span>
+  <div class="topo-dot"></div>
+  <span>Mês atual: vagas limitadas</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">MÉTODO VIPE</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#sobre">Sobre</a>
+    <a class="nav-link" href="#metodo">Método</a>
+    <a class="nav-link" href="#sessao">A Sessão</a>
+    <a class="nav-link" href="#depoimentos">Depoimentos</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+  </div>
+  <a class="nav-cta" href="#pagamento">GARANTIR VAGA</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-label">Consultoria Individual · Método VIPE</div>
+    <h1 class="hero-h1">
+      <span class="h1a">VOCÊ NÃO</span>
+      <span class="h1b">PRECISA SE</span>
+      <span class="h1a">ESFORÇAR MAIS.</span>
+      <span class="h1c">Você precisa se organizar melhor.</span>
+    </h1>
+    <p class="hero-desc">
+      Em <strong>75 minutos</strong>, identifico qual pilar da sua vida está travando os outros três — e você sai com um <em>protocolo personalizado de 90 dias.</em> Não motivação. Plano.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#pagamento" class="btn btn-primary">GARANTIR MINHA VAGA →</a>
+    </div>
+    <div class="hero-cta-sub">
+      <strong>R$497</strong> · 75 minutos · Zoom · Protocolo 90 dias incluso · 30 vagas/mês
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <!-- SUBSTITUA O BLOCO ABAIXO PELA SUA FOTO -->
+    <div class="hero-foto-placeholder">
+      <div class="hfp-icon">🪖</div>
+      <div class="hfp-txt">Substitua por sua foto profissional</div>
+    </div>
+    <!-- FIM DO PLACEHOLDER -->
+    <div class="hero-right-overlay"></div>
+    <div class="hero-numeros-lateral">
+      <div class="hnl"><span class="hnl-n">6</span><span class="hnl-l">Anos no<br>Exército</span></div>
+      <div class="hnl"><span class="hnl-n">3</span><span class="hnl-l">Promoções em<br>3 anos</span></div>
+      <div class="hnl"><span class="hnl-n">+30kg</span><span class="hnl-l">Massa<br>muscular</span></div>
+      <div class="hnl"><span class="hnl-n">17</span><span class="hnl-l">Países<br>visitados</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FRASE CENTRAL -->
+<div class="frase-bloco">
+  <div class="frase-bloco-txt">"DISCIPLINA SEM ESTRUTURA É APENAS ESFORÇO DESPERDIÇADO."</div>
+  <div class="frase-bloco-origem">— A filosofia por trás do Método VIPE</div>
+</div>
+
+<!-- ══ PROBLEMA ══ -->
+<section>
+<div class="wrap pad">
+  <div class="sec-label">Você se reconhece nisso?</div>
+  <h2 class="sec-titulo">SE VOCÊ ESTÁ AQUI,<br><em>EU JÁ TE CONHEÇO</em></h2>
+
+  <div class="prob-grid">
+    <div class="prob-item">
+      <div class="prob-marca"></div>
+      <div class="prob-corpo">
+        <div class="prob-titulo">Sabe o que precisa fazer — e não faz</div>
+        <div class="prob-desc">Já viu o conteúdo, já leu o livro. No final do dia a rotina não aconteceu. De novo.</div>
+      </div>
+    </div>
+    <div class="prob-item">
+      <div class="prob-marca"></div>
+      <div class="prob-corpo">
+        <div class="prob-titulo">Depende de motivação para agir</div>
+        <div class="prob-desc">Quando está alta você vai. Quando cai, para. O ciclo nunca muda.</div>
+      </div>
+    </div>
+    <div class="prob-item">
+      <div class="prob-marca"></div>
+      <div class="prob-corpo">
+        <div class="prob-titulo">Uma área avança, outra regride</div>
+        <div class="prob-desc">Treino vai bem e a carreira estagna. Carreira avança e o corpo some. Nunca os dois.</div>
+      </div>
+    </div>
+    <div class="prob-item">
+      <div class="prob-marca"></div>
+      <div class="prob-corpo">
+        <div class="prob-titulo">Dinheiro entra e some sem destino</div>
+        <div class="prob-desc">Tem renda mas não sabe para onde vai. A sensação de não acumular está sempre presente.</div>
+      </div>
+    </div>
+    <div class="prob-item">
+      <div class="prob-marca"></div>
+      <div class="prob-corpo">
+        <div class="prob-titulo">Mais potencial do que resultado</div>
+        <div class="prob-desc">Você sente que tem mais para dar. Isso incomoda mais do que qualquer fracasso externo.</div>
+      </div>
+    </div>
+    <div class="prob-item">
+      <div class="prob-marca"></div>
+      <div class="prob-corpo">
+        <div class="prob-titulo">Piloto automático em tudo</div>
+        <div class="prob-desc">Faz as coisas sem estar presente. Sente no treino, no trabalho, na vida. Sem intenção.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ HISTÓRIA ══ -->
+<section id="sobre">
+<div class="wrap pad">
+  <div class="sec-label">Quem vai te atender</div>
+  <h2 class="sec-titulo">POR QUE OUVIR<br><em>QUEM TEM 24 ANOS</em></h2>
+
+  <div class="historia-wrap">
+    <div>
+      <p class="historia-p">Entrei no Exército Brasileiro com 18 anos. <strong>Seis anos depois, saí com três promoções — duas delas em cinco meses.</strong> Não porque o sistema me favoreceu. Porque eu construí resultado onde a maioria se acomodou.</p>
+
+      <p class="historia-p">Enquanto estava na farda: formei em Ciências Contábeis com 20 anos, fiz duas pós-graduações aos 23, construí mais de <em>seis dígitos investidos</em> e visitei 17 países — com salário de militar. Ao mesmo tempo, 30 quilos de massa muscular construídos desde os 16. 1,90 de altura. 5km abaixo de 20 minutos.</p>
+
+      <p class="historia-p"><strong>Isso não foi talento. Foi sistema.</strong> Um sistema que testei, quebrei, reconstruí e validei — na minha vida e nos resultados de quem me acompanhava. Fui o primeiro soldado da história da minha unidade a ser promovido a 3º Sargento. Depois que fiz, outros três repetiram o feito.</p>
+
+      <p class="historia-p">Saí do Exército não porque estava difícil. Saí porque o ambiente que tanto me ensinou <em>já não tinha mais onde me fazer crescer.</em> Decidi apostar tudo em mim. Essa consultoria é essa aposta — em tempo real.</p>
+
+      <p class="historia-p"><strong>Não estou aqui para te motivar.</strong> Motivação é para quem precisa de empurrão. Você precisa de método.</p>
     </div>
 
-    <!-- NAV -->
-    <nav class="nav">
-        <div class="nav-logo">ELITE SYSTEM</div>
-        <div class="nav-links">
-            <a class="nav-link" href="#quem-sou">Quem Sou</a>
-            <a class="nav-link" href="#por-que">Por Que Funciona</a>
-            <a class="nav-link" href="#metodo">Método</a>
-            <a class="nav-link" href="#depoimentos">Provas Reais</a>
-        </div>
-        <button class="nav-cta" onclick="openConsultation()">AGENDAR SESSÃO</button>
-    </nav>
+    <div class="aside-numeros">
+      <div class="an-header">Evidências — não currículo</div>
+      <div class="an-item"><div class="an-num">6</div><div class="an-info"><div class="an-titulo">Anos no Exército Brasileiro</div><div class="an-sub">3 promoções · 2 em 5 meses</div></div></div>
+      <div class="an-item"><div class="an-num">20</div><div class="an-info"><div class="an-titulo">Formado em Ciências Contábeis</div><div class="an-sub">Aprovado no CFC na mesma época</div></div></div>
+      <div class="an-item"><div class="an-num">23</div><div class="an-info"><div class="an-titulo">Duas pós-graduações</div><div class="an-sub">+6 dígitos investidos na mesma idade</div></div></div>
+      <div class="an-item"><div class="an-num">17</div><div class="an-info"><div class="an-titulo">Países visitados</div><div class="an-sub">Com salário de militar</div></div></div>
+      <div class="an-item"><div class="an-num">30kg</div><div class="an-info"><div class="an-titulo">Massa muscular construída</div><div class="an-sub">Desde os 16 · corrida + musculação</div></div></div>
+    </div>
+  </div>
+</div>
+</section>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-left">
-            <div class="hero-label">Sistema de Alto Desempenho · Do Quartel à Elite</div>
+<div class="divider"></div>
 
-            <h1 class="hero-h1">
-                <span class="h1-main">VOCÊ JÁ</span>
-                <span class="h1-accent">CONHECE SEU POTENCIAL.</span>
-                <span class="h1-main">O PROBLEMA É A ESTRUTURA.</span>
-                <span class="h1-sub">Em 75 minutos, você monta a sua.</span>
-            </h1>
+<!-- ══ MÉTODO VIPE ══ -->
+<section id="metodo">
+<div class="wrap pad">
+  <div class="sec-label">A base da consultoria</div>
+  <h2 class="sec-titulo">MÉTODO <em>VIPE</em></h2>
 
-            <p class="hero-desc">
-                Fui o primeiro soldado da história da minha unidade a ser promovido 3 vezes em 3 anos. Ao mesmo tempo,
-                formei, fiz 2 pós-graduações, investi R$100k+, construí 30kg de músculo e visitei 17 países.
-                <strong>Não era talento. Era sistema.</strong> Essa consultoria transforma seu potencial em protocolo.
-            </p>
+  <div style="font-size:15px;color:var(--b2);line-height:1.85;max-width:680px;margin-bottom:44px;">
+    Quatro pilares que, quando alinhados, criam resultado simultâneo em todas as áreas. O diagnóstico identifica qual está travando os outros três. O protocolo destranca.
+  </div>
 
-            <div class="hero-cta-group">
-                <button class="btn btn-primary" onclick="openConsultation()">AGENDAR MINHA SESSÃO →</button>
-                <button class="btn btn-secondary" onclick="openEmailCapture()">RECEBER CONTEÚDO GRÁTIS</button>
-            </div>
+  <div class="vipe-grid">
+    <div class="vipe-pilar" data-letra="V"><span class="vp-letra">V</span><span class="vp-nome">Visão</span><div class="vp-desc">Clareza de destino antes de qualquer movimento. Sem destino, qualquer obstáculo vira motivo para parar.</div></div>
+    <div class="vipe-pilar" data-letra="I"><span class="vp-letra">I</span><span class="vp-nome">Integridade</span><div class="vp-desc">Fazer o que você disse para si mesmo que faria. Não quando tiver vontade — sempre. Isso é identidade.</div></div>
+    <div class="vipe-pilar" data-letra="P"><span class="vp-letra">P</span><span class="vp-nome">Prioridade</span><div class="vp-desc">O que entra na sua semana é definido pelo objetivo atual. O resto é cortado — sem culpa.</div></div>
+    <div class="vipe-pilar" data-letra="E"><span class="vp-letra">E</span><span class="vp-nome">Execução</span><div class="vp-desc">Presença total no que está fazendo. Não no piloto automático. Quem está presente executa mais em menos tempo.</div></div>
+  </div>
+</div>
+</section>
 
-            <div class="hero-cta-sub">
-                <strong>R$497</strong> · Sessão ao vivo · Protocolo personalizado · 30 vagas/mês
-            </div>
-        </div>
+<div class="divider"></div>
 
-        <div class="hero-right">
-            <div class="hero-right-bg"></div>
-            <div class="hero-foto">[foto.jpg]</div>
-            <div class="hero-right-overlay"></div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">6</span>
-                    <span class="stat-label">Anos no<br>Exército</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Promoções em<br>3 anos</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">+30kg</span>
-                    <span class="stat-label">Massa<br>muscular</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">17</span>
-                    <span class="stat-label">Países<br>visitados</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ══ A SESSÃO ══ -->
+<section id="sessao">
+<div class="wrap pad">
+  <div class="sec-label">O que você recebe</div>
+  <h2 class="sec-titulo">O QUE ACONTECE<br><em>NOS 75 MINUTOS</em></h2>
 
-    <!-- QUOTE -->
-    <div class="quote-section">
-        <div class="quote-text">
-            "ESTRUTURA SEM DIREÇÃO É CAOS. DIREÇÃO SEM ESTRUTURA É SONHO. OS DOIS JUNTOS? RESULTADO INEVITÁVEL."
-        </div>
+  <div class="steps">
+    <div class="step-item"><div class="step-n">01</div><div class="step-body"><div class="step-t">Diagnóstico VIPE — Identificação do Gargalo Principal</div><div class="step-d">Com base no formulário preenchido antes, identificamos qual pilar está travando tudo ao mesmo tempo. Cirúrgico, sem perder tempo com o básico.</div></div></div>
+    <div class="step-item"><div class="step-n">02</div><div class="step-body"><div class="step-t">Mapeamento de Potencial — O que Você Tem e Não Usa</div><div class="step-d">Você não precisa de mais informação — precisa de clareza sobre o que já tem e não está aproveitando. Mapeamos seus ativos ocultos.</div></div></div>
+    <div class="step-item"><div class="step-n">03</div><div class="step-body"><div class="step-t">Protocolo de 90 Dias Personalizado</div><div class="step-d">Você sai com um protocolo em 3 ciclos de 30 dias — ações semanais específicas e critério claro de progresso. Não conselhos genéricos.</div></div></div>
+    <div class="step-item"><div class="step-n">04</div><div class="step-body"><div class="step-t">Primeira Semana Definida ao Vivo</div><div class="step-d">A primeira semana é detalhada na sessão: quais ações, em quais dias, em quanto tempo. Você executa no dia seguinte.</div></div></div>
+    <div class="step-item"><div class="step-n">05</div><div class="step-body"><div class="step-t">Gravação + Protocolo por E-mail em até 24h</div><div class="step-d">Gravação completa da sessão e protocolo de 90 dias em PDF enviados por e-mail em até 24 horas.</div></div></div>
+  </div>
+
+  <div style="margin-top:1px;" >
+    <div class="entrega-grid">
+      <div class="entrega-item"><span class="ei-icon">⏱</span><div class="ei-titulo">75 Min ao Vivo</div><div class="ei-desc">Via Zoom. 100% baseado no seu formulário e situação real.</div></div>
+      <div class="entrega-item"><span class="ei-icon">📋</span><div class="ei-titulo">Protocolo 90 Dias</div><div class="ei-desc">PDF personalizado para o seu gargalo. 3 ciclos de 30 dias com ações semanais.</div></div>
+      <div class="entrega-item"><span class="ei-icon">🎥</span><div class="ei-titulo">Gravação Completa</div><div class="ei-desc">Link enviado em até 24h. Reveja quando precisar.</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ PARA QUEM É ══ -->
+<section>
+<div class="wrap pad">
+  <div class="sec-label">Filtro de qualidade</div>
+  <h2 class="sec-titulo">ESSA CONSULTORIA<br><em>NÃO É PARA TODO MUNDO</em></h2>
+
+  <div class="quem-grid">
+    <div class="quem-col">
+      <div class="quem-col-header sim">É para você se</div>
+      <div class="quem-items">
+        <div class="qi s">Você sente que tem mais potencial do que resultado — e isso incomoda de verdade</div>
+        <div class="qi s">Quer um sistema — não conteúdo, não inspiração, não dicas genéricas</div>
+        <div class="qi s">Está disposto a executar de forma diferente do que tem executado</div>
+        <div class="qi s">Entende que R$497 é investimento em estrutura — não gasto em motivação</div>
+        <div class="qi s">Vai preencher o formulário com honestidade total antes da sessão</div>
+      </div>
+    </div>
+    <div class="quem-col">
+      <div class="quem-col-header nao">Não é para você se</div>
+      <div class="quem-items">
+        <div class="qi n">Está buscando motivação e empurrão emocional — aqui é método, não hype</div>
+        <div class="qi n">Quer fórmula mágica sem compromisso de execução do seu lado</div>
+        <div class="qi n">Não está disposto a ser honesto sobre onde está travado</div>
+        <div class="qi n">Acredita que já sabe tudo e procura validação para continuar igual</div>
+        <div class="qi n">Não pretende aplicar o protocolo nas 48h seguintes à sessão</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ DEPOIMENTOS ══ -->
+<section id="depoimentos">
+<div class="wrap pad">
+  <div class="sec-label">O que dizem quem passou pela sessão</div>
+  <h2 class="sec-titulo">RESULTADOS<em>REAIS</em></h2>
+
+  <div class="dep-grid">
+    <div class="dep-placeholder"><div class="dp-icon">💬</div><div class="dp-txt">Depoimento do primeiro cliente — será adicionado após as primeiras sessões.</div></div>
+    <div class="dep-placeholder"><div class="dp-icon">💬</div><div class="dp-txt">Depoimento do segundo cliente — será adicionado após as primeiras sessões.</div></div>
+    <div class="dep-placeholder"><div class="dp-icon">💬</div><div class="dp-txt">Depoimento do terceiro cliente — será adicionado após as primeiras sessões.</div></div>
+  </div>
+
+  <div class="prova-grid">
+    <div class="prova-item">
+      <div class="prova-titulo">3 Soldados Promovidos</div>
+      <div class="prova-desc">Fui o primeiro soldado da história da minha unidade a ser promovido a 3º Sargento. Ensinando o processo, outros 3 repetiram o feito simultaneamente.</div>
+      <div class="prova-resultado">Método replicado · 3 resultados simultâneos</div>
+    </div>
+    <div class="prova-item">
+      <div class="prova-titulo">Transformação Física Comprovada</div>
+      <div class="prova-desc">Acompanhei um soldado que evoluiu em carga de musculação, quantidade de barras e distância de corrida — emagrecendo 5kg em 3 semanas. Tudo integrado.</div>
+      <div class="prova-resultado">−5kg · força · resistência · 3 semanas</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+<div class="wrap pad">
+  <div class="sec-label">Dúvidas frequentes</div>
+  <h2 class="sec-titulo">PERGUNTAS<em>E RESPOSTAS</em></h2>
+
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">Como funciona após o pagamento?</div>
+      <div class="faq-a">Após confirmar o pagamento, você recebe o link para agendar sua sessão e escolher a data disponível. Após agendar, recebe por e-mail o formulário de diagnóstico — que precisa ser preenchido com pelo menos 24 horas de antecedência.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">O formulário é obrigatório?</div>
+      <div class="faq-a">Sim, e sem exceções. O formulário é o que permite que os 75 minutos sejam 100% sobre você. Quem não preenche com pelo menos 24h de antecedência precisa remarcar.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Por que apenas 30 vagas por mês?</div>
+      <div class="faq-a">Cada sessão é preparada individualmente — leio o formulário antes, estruturo o diagnóstico e o protocolo. Qualidade exige limite. Quem não consegue vaga entra para o mês seguinte.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">A sessão é ao vivo ou gravada?</div>
+      <div class="faq-a">A sessão é ao vivo via Zoom. A gravação completa é enviada por e-mail em até 24h após a sessão, junto com o protocolo de 90 dias em PDF.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">E se eu não sentir que valeu?</div>
+      <div class="faq-a">Se ao final da sessão você sentir que não recebeu valor algum, entre em contato em até 7 dias. O compromisso é com resultado — não com ocupar 75 minutos sem entrega.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ CTA FINAL ══ -->
+<section class="cta-final" id="pagamento">
+  <div class="cta-inner">
+    <div class="cta-label">Consultoria Individual · Método VIPE</div>
+    <h2 class="cta-h2">
+      CHEGA DE ESFORÇO
+      <em>SEM ESTRUTURA.</em>
+    </h2>
+    <p class="cta-p">
+      Você já sabe que tem mais potencial. A sessão transforma esse potencial em protocolo — <strong>corpo, rotina, finanças e carreira em um sistema que funciona junto.</strong>
+    </p>
+
+    <div class="cta-box">
+      <div class="cta-preco-label">Consultoria Individual VIPE · 1 sessão · R$497</div>
+      <span class="cta-preco">R$497</span>
+      <div class="cta-preco-desc">Zoom · 75 min · Protocolo 90 dias · Gravação inclusa</div>
+      <a href="SEU_LINK_KIWIFY_AQUI" class="btn btn-primary" style="width:100%;justify-content:center;font-size:20px;padding:20px;">GARANTIR MINHA VAGA →</a>
+      <div class="cta-vagas">⚠ 30 vagas/mês — sem lista de espera durante o mês</div>
+      <div class="cta-garantia">Pagamento seguro · Após a compra você recebe o link de agendamento</div>
     </div>
 
-    <!-- PROBLEMA -->
-    <section>
-        <div class="wrap pad">
-            <div class="sec-label">A realidade</div>
-            <h2 class="sec-titulo">SE VOCÊ ESTÁ AQUI,<br><em>EU JÁ TE CONHEÇO</em></h2>
+    <p style="font-size:12px;color:var(--b3);max-width:440px;margin:24px auto 0;line-height:1.8;text-align:center;">
+      Após o pagamento → link de agendamento → formulário de diagnóstico → sessão ao vivo → protocolo de 90 dias no e-mail.
+    </p>
+  </div>
+</section>
 
-            <div class="proof-grid">
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Sabe o que fazer — não faz</div>
-                        <div class="proof-desc">Consome conteúdo, mas a rotina não acontece. Novamente.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Depende de motivação</div>
-                        <div class="proof-desc">Quando está alta, você move. Quando cai, para. Esse ciclo não muda.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Uma área avança, outra regride</div>
-                        <div class="proof-desc">Treino vai bem e carreira estagna. Carreira avança e corpo some.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Mais potencial que resultado</div>
-                        <div class="proof-desc">Você sente que tem mais para dar. Isso incomoda mais que qualquer fracasso.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Piloto automático em tudo</div>
-                        <div class="proof-desc">Faz as coisas sem estar presente. Sem intenção. Sem resultado real.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Dinheiro entra e desaparece</div>
-                        <div class="proof-desc">Tem renda mas não sabe o destino. Nunca acumula o que merecia.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">MÉTODO VIPE</div>
+  <div class="footer-txt">Do Quartel à Elite · Consultoria Individual · R$497 · 30 vagas/mês</div>
+</footer>
 
-    <div class="divider"></div>
-
-    <!-- QUEM SOU -->
-    <section id="quem-sou">
-        <div class="wrap pad">
-            <div class="sec-label">Por que ouvir</div>
-            <h2 class="sec-titulo">QUEM É ESSE<br><em>CARA DE 24 ANOS</em></h2>
-
-            <p style="font-size:15px;color:var(--b2);line-height:1.85;max-width:680px;margin-bottom:40px;">
-                A maioria do conteúdo que você consome vem de dois tipos de pessoa: quem teve sorte e agora vende
-                "como ter sucesso," ou quem falhou e vende "como evitar falha." Eu sou diferente.
-            </p>
-
-            <div class="proof-grid" style="margin-bottom: 40px;">
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Primeiro Sargento Promovido 3x em 3 Anos</div>
-                        <div class="proof-desc">Dentro de 6 anos no Exército Brasileiro, fui o PRIMEIRO soldado da
-                            história da minha unidade a alcançar 3º Sargento. Duas promoções em apenas 5 meses.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Formado aos 20 + Duas Pós aos 23</div>
-                        <div class="proof-desc">Ciências Contábeis enquanto militar. Depois duas pós-graduações. Tudo
-                            dentro dos prazos planejados — não por talento, por sistema.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">R$100k+ Investidos por 23 Anos</div>
-                        <div class="proof-desc">Com salário de militar. Não nasci rico. Construí um sistema de
-                            investimento que funciona com qualquer renda — e replicável para seus clientes.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">30kg de Massa Muscular Construída</div>
-                        <div class="proof-desc">Desde os 16. Progressão mensurável. Tudo documentado. Você pode
-                            replicar — se tiver estrutura.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">17 Países Visitados</div>
-                        <div class="proof-desc">Com salário de quartel. Não viajei como mochileiro quebrado. Viajei
-                            estruturado — método que agora ensino.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Tudo Isso Ao Mesmo Tempo</div>
-                        <div class="proof-desc">Aqui está a diferença: Não fiz uma coisa de cada vez. Fiz tudo
-                            integrado. Essa integração é o que você aprenderá.</div>
-                    </div>
-                </div>
-            </div>
-
-            <p style="font-size:15px;color:var(--b1);line-height:1.8;max-width:680px;border-left:3px solid var(--petroleo);padding-left:24px;">
-                <strong>Não estou aqui para te motivar.</strong> Motivação é para quem precisa de empurrão. Você precisa
-                de estrutura. De protocolo. De um sistema que funcione quando a motivação desaparece — porque ela
-                desaparece.
-            </p>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- MÉTODO -->
-    <section id="metodo">
-        <div class="wrap pad">
-            <div class="sec-label">A Estrutura</div>
-            <h2 class="sec-titulo">SISTEMA DE ALTO<br><em>DESEMPENHO ELITE</em></h2>
-
-            <p style="font-size:15px;color:var(--b2);line-height:1.85;max-width:680px;margin-bottom:44px;">
-                Quatro pilares que, quando alinhados, criam resultado simultâneo em todas as áreas da sua vida. Na
-                sessão, identifica qual está travando os outros três. Depois, você executa o protocolo de 90 dias para
-                destrancá-lo.
-            </p>
-
-            <div class="method-grid">
-                <div class="method-pillar">
-                    <span class="method-letter">V</span>
-                    <span class="method-name">Visão</span>
-                    <div class="method-desc">Clareza de destino antes de qualquer movimento. Sem destino, qualquer
-                        obstáculo vira motivo para parar.</div>
-                </div>
-                <div class="method-pillar">
-                    <span class="method-letter">I</span>
-                    <span class="method-name">Integridade</span>
-                    <div class="method-desc">Fazer o que você disse para si mesmo que faria. Não quando tiver vontade
-                        — sempre. Isso é identidade.</div>
-                </div>
-                <div class="method-pillar">
-                    <span class="method-letter">P</span>
-                    <span class="method-name">Prioridade</span>
-                    <div class="method-desc">O que entra na sua semana é definido pelo seu objetivo atual. O resto é
-                        cortado — sem culpa.</div>
-                </div>
-                <div class="method-pillar">
-                    <span class="method-letter">E</span>
-                    <span class="method-name">Execução</span>
-                    <div class="method-desc">Presença total no que está fazendo. Não no piloto automático. Quem está
-                        presente executa mais em menos tempo.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- COMO FUNCIONA -->
-    <section id="por-que">
-        <div class="wrap pad">
-            <div class="sec-label">O Que Você Recebe</div>
-            <h2 class="sec-titulo">75 MINUTOS QUE<br><em>MUDAM TUDO</em></h2>
-
-            <div class="proof-grid" style="margin-bottom: 48px;">
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">01 · Diagnóstico Estruturado</div>
-                        <div class="proof-desc">Identifica qual pilar (Visão, Integridade, Prioridade, Execução) está
-                            travando tudo. Sem genéricos — cirúrgico.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">02 · Mapeamento de Ativos</div>
-                        <div class="proof-desc">Você já TEM muito. O problema é não estar usando. Mapeamos seus ativos
-                            ocultos — conhecimento, tempo, recursos.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">03 · Protocolo de 90 Dias</div>
-                        <div class="proof-desc">Personalizado para seu gargalo. 3 ciclos de 30 dias. Ações semanais
-                            específicas. Critério claro de progresso. Não conselhos genéricos.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">04 · Primeira Semana Definida</div>
-                        <div class="proof-desc">Ao vivo na sessão: Quais ações, em quais dias, em quanto tempo. Você
-                            executa no dia seguinte.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">05 · Gravação + PDF</div>
-                        <div class="proof-desc">Gravação completa da sessão e protocolo em PDF enviados dentro de 24
-                            horas. Revise quando precisar.</div>
-                    </div>
-                </div>
-                <div class="proof-card">
-                    <div class="proof-icon"></div>
-                    <div>
-                        <div class="proof-title">Bônus: Acesso à Comunidade</div>
-                        <div class="proof-desc">Grupo privado de clientes onde você acompanha outros resultados,
-                            progresso e suporta/é suportado.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- DEPOIMENTOS -->
-    <section id="depoimentos">
-        <div class="wrap pad">
-            <div class="sec-label">Provas Reais</div>
-            <h2 class="sec-titulo">QUEM JÁ<br><em>TRANSFORMOU</em></h2>
-
-            <div class="testimonial-grid">
-                <div class="testimonial-placeholder">
-                    <div class="placeholder-icon">💬</div>
-                    <div class="placeholder-text">Seu depoimento virá aqui após as primeiras sessões com clientes
-                        reais.</div>
-                </div>
-                <div class="testimonial-placeholder">
-                    <div class="placeholder-icon">💬</div>
-                    <div class="placeholder-text">Os resultados falam mais que palavras — documentaremos cada
-                        transformação.</div>
-                </div>
-                <div class="testimonial-placeholder">
-                    <div class="placeholder-icon">💬</div>
-                    <div class="placeholder-text">Clientes reais, casos reais, métricas reais. Nada fabricado.</div>
-                </div>
-            </div>
-
-            <div style="margin-top:48px;">
-                <h3 style="font-family:var(--disp);font-size:32px;color:var(--petroleo);margin-bottom:32px;">EVIDÊNCIAS
-                    DOCUMENTADAS</h3>
-
-                <div class="proof-grid">
-                    <div class="proof-card">
-                        <div class="proof-icon"></div>
-                        <div>
-                            <div class="proof-title">3 Soldados Promovidos Simultaneamente</div>
-                            <div class="proof-desc">Fui o primeiro a alcançar o cargo. Depois ensinei o sistema para 3
-                                subordinados. Todos foram promovidos na mesma época. Método comprovado.</div>
-                        </div>
-                    </div>
-                    <div class="proof-card">
-                        <div class="proof-icon"></div>
-                        <div>
-                            <div class="proof-title">Transformação Física Estruturada</div>
-                            <div class="proof-desc">30kg de massa muscular construída com progressão documentada. Cada
-                                fase planejada, executada, medida. Replicável.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- CTA FINAL -->
-    <section class="cta-final">
-        <div class="cta-inner">
-            <div class="cta-label">Consultoria Individual · Sistema ELITE</div>
-
-            <h2 class="cta-h2">
-                VOCÊ JÁ TENTOU
-                <em>SOZINHO.</em>
-                AGORA É DIFERENTE.
-            </h2>
-
-            <p class="cta-p">
-                <strong>Em 75 minutos você identifica seu gargalo.</strong> Nos 90 dias seguintes, você executa um
-                protocolo personalizado que destranca tudo. Corpo, rotina, finanças, carreira — integrado em um único
-                sistema.
-            </p>
-
-            <div class="cta-box">
-                <div class="price-label">Consultoria ELITE · Uma Sessão</div>
-                <span class="price">R$497</span>
-                <div class="price-desc">75 min ao vivo · Protocolo 90 dias personalizado · Gravação inclusa · Acesso
-                    comunidade</div>
-
-                <button class="btn btn-primary" style="width:100%;justify-content:center;padding:18px;font-size:18px;margin-bottom:12px;"
-                    onclick="openConsultation()">
-                    AGENDAR MINHA SESSÃO →
-                </button>
-
-                <div class="cta-warning">⚠ 30 vagas por mês — sem lista de espera durante o período</div>
-                <div class="cta-guarantee">Pagamento seguro via Kiwify · Acesso imediato ao agendamento</div>
-            </div>
-
-            <p style="font-size:12px;color:var(--b3);max-width:440px;margin:24px auto 0;line-height:1.8;text-align:center;">
-                Pagamento → Agendamento → Formulário de diagnóstico (24h antes) → Sessão ao vivo → Protocolo no e-mail
-            </p>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-brand">ELITE SYSTEM</div>
-        <div class="footer-txt">Do Quartel à Elite · Consultoria Individual · R$497 · 30 vagas/mês</div>
-    </footer>
-
-    <!-- MODALS -->
-
-    <!-- CONSULTATION MODAL -->
-    <div id="consultationModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeConsultation()">&times;</span>
-            <h3 class="modal-title">Agendar Sessão</h3>
-            <p class="modal-subtitle">Escolha sua data e horário — sessão ao vivo via Zoom</p>
-
-            <form onsubmit="submitConsultation(event)">
-                <div class="form-group">
-                    <label class="form-label">Nome Completo</label>
-                    <input type="text" class="form-input" required placeholder="Seu nome">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">E-mail</label>
-                    <input type="email" class="form-input" required placeholder="seu@email.com">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">WhatsApp (com código do país)</label>
-                    <input type="tel" class="form-input" required placeholder="+55 11 99999-9999">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Qual é seu principal gargalo?</label>
-                    <textarea class="form-textarea" required
-                        placeholder="Descreva brevemente o que está travando sua vida..."></textarea>
-                </div>
-
-                <p style="font-size:11px;color:var(--b3);margin-bottom:16px;">
-                    Após confirmar, você será redirecionado ao Kiwify para pagamento (R$497). Depois, receberá o link
-                    para escolher seu horário.
-                </p>
-
-                <button type="submit" class="form-submit">IR PARA PAGAMENTO</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- EMAIL CAPTURE MODAL -->
-    <div id="emailModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeEmailCapture()">&times;</span>
-            <h3 class="modal-title">Conteúdo Grátis</h3>
-            <p class="modal-subtitle">Receba 3 vídeos exclusivos + guia de estrutura pessoal</p>
-
-            <form onsubmit="submitEmail(event)">
-                <div class="form-group">
-                    <label class="form-label">Seu Nome</label>
-                    <input type="text" class="form-input" required placeholder="Como você se chama?">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">E-mail</label>
-                    <input type="email" class="form-input" required placeholder="seu@email.com">
-                </div>
-
-                <p style="font-size:11px;color:var(--b3);margin-bottom:16px;">
-                    Você receberá conteúdo estratégico direto no seu e-mail. Sem spam, sem venda forçada. Apenas
-                    estrutura e sistema.
-                </p>
-
-                <button type="submit" class="form-submit">RECEBER CONTEÚDO GRÁTIS</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // MODAL FUNCTIONS
-        function openConsultation() {
-            document.getElementById('consultationModal').style.display = 'block';
-        }
-
-        function closeConsultation() {
-            document.getElementById('consultationModal').style.display = 'none';
-        }
-
-        function openEmailCapture() {
-            document.getElementById('emailModal').style.display = 'block';
-        }
-
-        function closeEmailCapture() {
-            document.getElementById('emailModal').style.display = 'none';
-        }
-
-        window.onclick = function (event) {
-            const consultationModal = document.getElementById('consultationModal');
-            const emailModal = document.getElementById('emailModal');
-
-            if (event.target === consultationModal) {
-                consultationModal.style.display = 'none';
-            }
-            if (event.target === emailModal) {
-                emailModal.style.display = 'none';
-            }
-        }
-
-        // FORM SUBMISSIONS
-        function submitConsultation(event) {
-            event.preventDefault();
-            // THIS WILL REDIRECT TO YOUR KIWIFY LINK
-            // Replace 'YOUR_KIWIFY_LINK' with your actual Kiwify product link
-            window.location.href = 'https://kiwify.com.br/sua-consultoria'; // CHANGE THIS
-        }
-
-        function submitEmail(event) {
-            event.preventDefault();
-            // INTEGRATE WITH YOUR EMAIL SERVICE
-            // This is a placeholder — you'll connect to Mailchimp, Brevo, or your CRM
-            const form = event.target;
-            const name = form.elements[0].value;
-            const email = form.elements[1].value;
-
-            console.log('Email captured:', { name, email });
-            // Send to your backend/email service
-
-            alert('Conteúdo será enviado para seu e-mail em breve!');
-            closeEmailCapture();
-        }
-
-        // SMOOTH SCROLL FOR NAV LINKS
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
+<script>
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
 </body>
-
 </html>
