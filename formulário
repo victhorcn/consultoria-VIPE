@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Pré-Sessão — Método VIPE</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#040608;--c1:#080d0f;--c2:#0d1518;--c3:#162028;
+  --petroleo:#1a6b5a;--pl:#22897a;--pd:#0f3d33;
+  --pa:rgba(26,107,90,.10);--pb:rgba(26,107,90,.25);
+  --branco:#edf2f0;--b1:#c8d4d0;--b2:#8fa89f;--b3:#4a6058;--b4:#1e2a26;
+  --acc:#c8392b;
+  --sans:'Barlow',sans-serif;
+  --cond:'Barlow Condensed',sans-serif;
+  --disp:'Bebas Neue',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--branco);font-family:var(--sans);line-height:1.7;overflow-x:hidden;}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.5;mix-blend-mode:overlay;
+}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+
+/* TOPO */
+.topo{background:var(--petroleo);padding:10px 24px;text-align:center;
+  font-family:var(--cond);font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:#000;font-weight:700;}
+
+/* HERO */
+.hero{padding:72px 0 56px;border-bottom:1px solid rgba(26,107,90,.2);}
+.hero-label{font-family:var(--cond);font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--petroleo);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-label::before{content:'';width:28px;height:2px;background:var(--petroleo);}
+.hero-h1{font-family:var(--disp);font-size:clamp(48px,8vw,80px);line-height:.88;letter-spacing:1px;margin-bottom:24px;}
+.hero-h1 span{color:var(--petroleo);display:block;}
+.hero-desc{font-size:15px;color:var(--b1);line-height:1.85;max-width:580px;margin-bottom:28px;}
+.hero-desc strong{color:var(--branco);}
+.hero-desc em{color:var(--pl);font-style:normal;}
+
+.aviso-box{background:var(--pa);border:1px solid var(--pb);border-radius:4px;padding:20px 24px;margin-bottom:0;}
+.aviso-label{font-family:var(--cond);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--petroleo);margin-bottom:10px;}
+.aviso-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.aviso-list li{font-size:13px;color:var(--b1);padding-left:18px;position:relative;line-height:1.6;}
+.aviso-list li::before{content:'→';position:absolute;left:0;color:var(--petroleo);}
+.aviso-list li strong{color:var(--branco);}
+
+/* BLOCOS DE SEÇÃO */
+.section-block{padding:48px 0;border-bottom:1px solid rgba(26,107,90,.12);}
+.section-block:last-child{border-bottom:none;}
+.sec-num{font-family:var(--cond);font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--petroleo);margin-bottom:8px;}
+.sec-title{font-family:var(--disp);font-size:clamp(24px,4vw,36px);letter-spacing:1px;
+  color:var(--branco);margin-bottom:6px;line-height:1;}
+.sec-title em{color:var(--petroleo);}
+.sec-desc{font-size:13px;color:var(--b2);line-height:1.7;margin-bottom:32px;max-width:520px;}
+
+/* CAMPO */
+.campo{margin-bottom:28px;}
+.campo-label{display:block;font-family:var(--cond);font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--b1);margin-bottom:8px;font-weight:600;}
+.campo-sub{font-size:12px;color:var(--b3);margin-bottom:10px;line-height:1.6;font-style:italic;}
+.campo-nota{font-size:11px;color:var(--petroleo);margin-top:6px;display:block;
+  font-family:var(--cond);letter-spacing:1px;}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select{
+  width:100%;background:var(--c2);border:1px solid rgba(26,107,90,.25);
+  color:var(--branco);font-family:var(--sans);font-size:14px;
+  padding:14px 16px;border-radius:2px;outline:none;
+  transition:border-color .2s,background .2s;
+  -webkit-appearance:none;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus{border-color:var(--petroleo);background:var(--c3);}
+input::placeholder,textarea::placeholder{color:var(--b3);}
+textarea{resize:vertical;min-height:100px;line-height:1.6;}
+select option{background:var(--c1);color:var(--branco);}
+
+/* RADIO / CHECK */
+.opcoes{display:flex;flex-direction:column;gap:8px;}
+.opcao{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;
+  background:var(--c2);border:1px solid rgba(26,107,90,.2);border-radius:2px;
+  cursor:pointer;transition:border-color .2s,background .2s;}
+.opcao:hover{border-color:rgba(26,107,90,.5);background:var(--c3);}
+.opcao input{display:none;}
+.opcao.selecionada{border-color:var(--petroleo);background:var(--pa);}
+.opcao-radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--b3);
+  flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s;}
+.opcao.selecionada .opcao-radio{border-color:var(--petroleo);}
+.opcao.selecionada .opcao-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--petroleo);}
+.opcao-txt{font-size:14px;color:var(--b1);line-height:1.5;}
+.opcao.selecionada .opcao-txt{color:var(--branco);}
+
+/* ESCALA */
+.escala{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+.escala-opt{text-align:center;cursor:pointer;}
+.escala-opt input{display:none;}
+.escala-btn{display:block;padding:12px 4px;background:var(--c2);
+  border:1px solid rgba(26,107,90,.2);border-radius:2px;
+  font-family:var(--disp);font-size:22px;color:var(--b2);
+  transition:all .2s;}
+.escala-opt:hover .escala-btn{border-color:rgba(26,107,90,.5);color:var(--branco);}
+.escala-opt.sel .escala-btn{background:var(--pa);border-color:var(--petroleo);color:var(--pl);}
+.escala-labels{display:flex;justify-content:space-between;margin-top:6px;}
+.escala-labels span{font-size:10px;color:var(--b3);letter-spacing:1px;}
+
+/* DIVISOR INTERNO */
+.campo-divider{height:1px;background:rgba(26,107,90,.12);margin:8px 0 28px;}
+
+/* ALERTA INTERNO */
+.nota-interna{background:rgba(200,57,43,.08);border:1px solid rgba(200,57,43,.2);
+  border-radius:2px;padding:14px 18px;margin-bottom:28px;}
+.nota-interna p{font-size:12px;color:#e07060;line-height:1.65;}
+.nota-interna strong{color:var(--branco);}
+
+/* BTN SUBMIT */
+.btn-submit{
+  display:block;width:100%;
+  background:var(--petroleo);color:#000;
+  font-family:var(--disp);font-size:22px;letter-spacing:2px;
+  padding:20px;border:none;cursor:pointer;
+  border-radius:2px;text-align:center;
+  transition:background .2s;margin-top:40px;
+}
+.btn-submit:hover{background:var(--pl);}
+
+/* FOOTER */
+.form-footer{padding:40px 0;text-align:center;}
+.form-footer p{font-size:12px;color:var(--b3);line-height:1.8;}
+.form-footer strong{color:var(--b2);}
+
+/* SUCESSO */
+.sucesso{display:none;padding:80px 0;text-align:center;}
+.sucesso.ativo{display:block;}
+.suc-icon{font-size:48px;margin-bottom:24px;opacity:.6;}
+.suc-title{font-family:var(--disp);font-size:48px;color:var(--petroleo);margin-bottom:16px;}
+.suc-txt{font-size:15px;color:var(--b1);line-height:1.8;max-width:480px;margin:0 auto;}
+
+@media(max-width:600px){
+  .escala{grid-template-columns:repeat(5,1fr);}
+  .hero{padding:48px 0 40px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topo">⚠ Prazo obrigatório: 24 horas antes da sessão · Preencha com sinceridade total</div>
+
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Consultoria Individual · Método VIPE</div>
+  <h1 class="hero-h1">DIAGNÓSTICO<span>PRÉ-SESSÃO</span></h1>
+  <p class="hero-desc">
+    Esse formulário não é burocracia. É o que permite que os <strong>60 minutos da nossa sessão sejam 100% sobre você</strong> — sem perder tempo com apresentações ou contexto básico.<br><br>
+    Responda com sinceridade total. <em>Não existe resposta certa.</em> Existe resposta honesta — e é ela que vai determinar a qualidade do que você vai receber.
+  </p>
+
+  <div class="aviso-box">
+    <div class="aviso-label">Antes de começar</div>
+    <ul class="aviso-list">
+      <li><strong>Tempo estimado:</strong> 20 a 30 minutos. Reserve esse tempo. Não preencha no intervalo de outra coisa.</li>
+      <li><strong>Prazo:</strong> mínimo 24 horas antes da sessão. Quem não cumprir, remarca.</li>
+      <li><strong>Cada resposta importa:</strong> quanto mais específico, mais cirúrgica a sessão.</li>
+      <li><strong>Você não precisa se esforçar mais. Você precisa se organizar melhor.</strong> Esse formulário começa esse processo.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FORMULÁRIO -->
+<form id="form-vipe" onsubmit="enviar(event)">
+
+<!-- ── BLOCO 1: IDENTIFICAÇÃO ── -->
+<div class="section-block">
+  <div class="sec-num">Bloco 01 / 05</div>
+  <div class="sec-title">QUEM <em>VOCÊ É</em></div>
+  <div class="sec-desc">Informações básicas para eu saber com quem estou falando antes de te ver na tela.</div>
+
+  <div class="campo">
+    <label class="campo-label">Nome completo</label>
+    <input type="text" placeholder="Como você prefere ser chamado durante a sessão" required>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Idade</label>
+    <input type="number" placeholder="Sua idade atual" min="16" max="60" required>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">E-mail</label>
+    <div class="campo-sub">Aqui você vai receber a gravação e o protocolo de 90 dias após a sessão.</div>
+    <input type="email" placeholder="Seu melhor e-mail" required>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Ocupação atual</label>
+    <div class="campo-sub">O que você faz hoje para gerar renda — seja emprego, negócio próprio ou estudo.</div>
+    <input type="text" placeholder="Ex: CLT em empresa X, autônomo na área Y, estudante de..." required>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Situação familiar</label>
+    <div class="opcoes" id="familiar">
+      <div class="opcao" onclick="selecionar('familiar',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Moro sozinho — independente financeiramente</div>
+      </div>
+      <div class="opcao" onclick="selecionar('familiar',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Moro com os pais — sem dependentes financeiros</div>
+      </div>
+      <div class="opcao" onclick="selecionar('familiar',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Tenho cônjuge ou parceiro(a) — sem filhos</div>
+      </div>
+      <div class="opcao" onclick="selecionar('familiar',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Tenho família — cônjuge e filhos que dependem de mim</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── BLOCO 2: ROTINA REAL ── -->
+<div class="section-block">
+  <div class="sec-num">Bloco 02 / 05</div>
+  <div class="sec-title">SUA ROTINA <em>REAL</em></div>
+  <div class="sec-desc">Não a rotina que você acha que deveria ter. A que você realmente tem — incluindo os horários que você não gosta de admitir.</div>
+
+  <div class="campo">
+    <label class="campo-label">Descreva um dia típico da sua semana</label>
+    <div class="campo-sub">Da hora que acorda até dormir. Inclua horários aproximados e o que faz no tempo livre. Seja específico — "academia" ou "trabalho" não é suficiente. Quanto tempo, com que frequência, o que vem antes e depois.</div>
+    <textarea placeholder="Ex: 6h00 acordo, 6h30 academia (peito e tríceps, 1h15min), 8h trabalho como CLT na área de vendas, 12h almoço em casa ou restaurante próximo, 13h30 volto ao trabalho, 18h saio, 19h chego em casa, 19h30 jantar, 20h Netflix ou celular, 23h durmo..." style="min-height:150px;" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Relação atual com treino</label>
+    <div class="opcoes" id="treino">
+      <div class="opcao" onclick="selecionar('treino',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Treino 4+ vezes por semana com protocolo definido e consistente</div>
+      </div>
+      <div class="opcao" onclick="selecionar('treino',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Treino quando consigo, sem consistência — dependo de motivação ou disposição</div>
+      </div>
+      <div class="opcao" onclick="selecionar('treino',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Começo e paro — consigo 2 a 3 semanas seguidas, depois perco continuidade</div>
+      </div>
+      <div class="opcao" onclick="selecionar('treino',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Não estou treinando no momento</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Para onde vai seu dinheiro todo mês?</label>
+    <div class="campo-sub">Não precisa ser contabilidade. Me diz as categorias principais e quanto vai para cada uma — aluguel, alimentação, lazer, investimentos, compras, etc. Seja honesto.</div>
+    <textarea placeholder="Ex: R$1.200 aluguel, R$600 alimentação, R$300 academia e suplementos, R$400 saídas e lazer, R$200 assinaturas, R$100 investimento... sobra nada." required></textarea>
+  </div>
+</div>
+
+<!-- ── BLOCO 3: O PROBLEMA REAL ── -->
+<div class="section-block">
+  <div class="sec-num">Bloco 03 / 05</div>
+  <div class="sec-title">O PROBLEMA <em>REAL</em></div>
+  <div class="sec-desc">Esse é o bloco mais importante do formulário. Quanto mais honesto você for aqui, mais cirúrgica vai ser a sessão. Não existe resposta errada — existe resposta superficial.</div>
+
+  <div class="campo">
+    <label class="campo-label">Qual é o maior problema que você enfrenta agora?</label>
+    <div class="campo-sub">Em uma frase. O que mais incomoda, o que mais trava, o que você sente que está abaixo do seu potencial.</div>
+    <textarea placeholder="Uma frase direta. Ex: 'Sei o que preciso fazer mas não consigo executar de forma consistente' ou 'Trabalho muito mas não vejo progresso financeiro'" style="min-height:80px;" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Se você não resolver isso agora — o que acontece daqui 1 ano?</label>
+    <div class="campo-sub">Seja brutal. Não o que você espera — o que acontece se você continuar exatamente igual.</div>
+    <textarea placeholder="Descreva o cenário real daqui 1 ano se nada mudar..." required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Qual foi a última promessa que você fez para si mesmo e não cumpriu?</label>
+    <div class="campo-sub">Uma única resposta. O que era, quando você prometeu, o que aconteceu. Seja específico — não "comecei dieta e parei". Conta o que realmente aconteceu.</div>
+    <textarea placeholder="Ex: 'Em janeiro prometi que ia acordar 5h30 todo dia para treinar antes do trabalho. Durei 9 dias. Parei porque numa sexta dormi tarde e não acordei. No final de semana não retomei e foi embora.'" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">O que você sabe que está te atrasando — mas ainda não parou?</label>
+    <div class="campo-sub">Pode ser um hábito, uma situação, uma pessoa, um padrão de comportamento. O que você já sabe que é problema mas continua fazendo assim mesmo.</div>
+    <textarea placeholder="Seja direto. Não vai ser julgado aqui." required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Tem algo que você faz com total consistência — mesmo sem vontade, mesmo cansado?</label>
+    <div class="campo-sub">Qualquer coisa. Trabalho, obrigação, hábito, rotina. O objetivo é entender onde sua disciplina já funciona — para replicar o mecanismo.</div>
+    <textarea placeholder="Ex: 'Nunca falto ao trabalho mesmo quando estou doente' ou 'Sempre pago minhas contas em dia'" style="min-height:80px;" required></textarea>
+  </div>
+</div>
+
+<!-- ── BLOCO 4: POTENCIAL E DIREÇÃO ── -->
+<div class="section-block">
+  <div class="sec-num">Bloco 04 / 05</div>
+  <div class="sec-title">SEU POTENCIAL <em>REAL</em></div>
+  <div class="sec-desc">Esse bloco revela o que você já tem — e ainda não está usando. Às vezes o gargalo não é falta de capacidade. É falta de direção.</div>
+
+  <div class="campo">
+    <label class="campo-label">Você tem alguma habilidade ou conhecimento que outras pessoas te pedem ajuda?</label>
+    <div class="campo-sub">Qualquer área — profissional, física, financeira, relacional. O que as pessoas ao seu redor naturalmente te procuram quando precisam de ajuda ou conselho.</div>
+    <textarea placeholder="Ex: 'Amigos sempre me perguntam sobre treino', 'Colegas me pedem ajuda com planilhas', 'Família me consulta sobre investimentos'..." style="min-height:80px;" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Qual é seu principal objetivo hoje?</label>
+    <div class="campo-sub">O que você quer alcançar — não o que acha que deveria querer. O objetivo real, concreto, mensurável.</div>
+    <textarea placeholder="Seja específico: não 'quero ser bem-sucedido' mas 'quero ganhar R$8.000/mês sendo autônomo até dezembro' ou 'quero ter 85kg com menos de 15% de gordura em 6 meses'" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Onde você <strong>não quer estar</strong> daqui 2 anos?</label>
+    <div class="campo-sub">O cenário que te assusta. O que você está correndo para não virar.</div>
+    <textarea placeholder="Ex: 'No mesmo emprego, com o mesmo salário, sem ter tentado nada diferente' ou 'Com 30 anos de idade e ainda dependendo dos meus pais'" style="min-height:80px;" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Se dinheiro e tempo não fossem obstáculos — o que você estaria fazendo hoje?</label>
+    <div class="campo-sub">Não é uma pergunta filosófica. É um mapa do que você realmente quer — sem os filtros que a realidade impõe.</div>
+    <textarea placeholder="Descreva sua vida ideal se os obstáculos financeiros e de tempo não existissem..." style="min-height:80px;" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">O que você já tentou que não funcionou?</label>
+    <div class="campo-sub">Métodos, programas, estratégias, promessas. O que você tentou para resolver o problema principal — e por que não funcionou.</div>
+    <textarea placeholder="Ex: 'Tentei app de hábitos por 3 meses — parei depois de uma viagem e não voltei. Tentei acordar mais cedo mas sem motivo específico. Tentei planner mas não mantive o hábito de preencher'..." required></textarea>
+  </div>
+</div>
+
+<!-- ── BLOCO 5: EXPECTATIVA E COMPROMISSO ── -->
+<div class="section-block">
+  <div class="sec-num">Bloco 05 / 05</div>
+  <div class="sec-title">EXPECTATIVA <em>E COMPROMISSO</em></div>
+  <div class="sec-desc">O último bloco define como vou conduzir a sessão. Leia com atenção — especialmente a última pergunta.</div>
+
+  <div class="campo">
+    <label class="campo-label">O que você espera desta consultoria?</label>
+    <div class="campo-sub">Seja específico. "Quero melhorar" não me ajuda. "Quero sair com um plano de 90 dias para sair do emprego atual e começar a trabalhar por conta própria" — isso me ajuda. Quanto mais específico, mais útil a sessão.</div>
+    <textarea placeholder="O que você quer que aconteça durante e após a sessão? O que seria um resultado excelente para você?" style="min-height:120px;" required></textarea>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Há alguma informação relevante sobre sua situação que as perguntas acima não cobriram?</label>
+    <div class="campo-sub">Qualquer contexto que você acha importante que eu saiba antes de te ver na sessão.</div>
+    <textarea placeholder="Opcional — mas se tiver algo relevante, conte aqui." style="min-height:80px;"></textarea>
+  </div>
+
+  <div class="campo-divider"></div>
+
+  <div class="campo">
+    <label class="campo-label">Em uma escala de 1 a 5 — o quanto você está disposto a mudar algo concreto nos próximos 7 dias?</label>
+    <div class="campo-sub">Não o quanto você quer mudar. O quanto você vai mudar — com base no histórico das suas últimas tentativas.</div>
+    <div class="escala" id="escala-compromisso">
+      <div class="escala-opt" onclick="selecionarEscala(this,1)">
+        <div class="escala-btn">1</div>
+      </div>
+      <div class="escala-opt" onclick="selecionarEscala(this,2)">
+        <div class="escala-btn">2</div>
+      </div>
+      <div class="escala-opt" onclick="selecionarEscala(this,3)">
+        <div class="escala-btn">3</div>
+      </div>
+      <div class="escala-opt" onclick="selecionarEscala(this,4)">
+        <div class="escala-btn">4</div>
+      </div>
+      <div class="escala-opt" onclick="selecionarEscala(this,5)">
+        <div class="escala-btn">5</div>
+      </div>
+    </div>
+    <div class="escala-labels">
+      <span>Provavelmente não</span>
+      <span>Com certeza</span>
+    </div>
+    <div id="escala-nota" style="display:none;margin-top:12px;"></div>
+  </div>
+
+  <div class="nota-interna" id="nota-baixa" style="display:none;">
+    <p><strong>Nota importante:</strong> você marcou 1 ou 2. Isso não impede a sessão — mas significa que vamos trabalhar primeiro no que está bloqueando sua disposição para mudar. Seja honesto sobre isso durante a sessão.</p>
+  </div>
+
+  <div class="campo">
+    <label class="campo-label">Compromisso final</label>
+    <div class="campo-sub">Leia e confirme antes de enviar.</div>
+    <div class="opcoes" id="compromisso">
+      <div class="opcao" onclick="selecionar('compromisso',this)">
+        <div class="opcao-radio"></div>
+        <div class="opcao-txt">Li o formulário com atenção, respondi com sinceridade e estou comprometido a aplicar o protocolo que sair da sessão nos primeiros 7 dias — independente de como eu estiver me sentindo.</div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-submit">ENVIAR DIAGNÓSTICO →</button>
+
+</div>
+</form>
+
+<!-- SUCESSO -->
+<div class="sucesso" id="sucesso">
+  <div class="suc-icon">✓</div>
+  <div class="suc-title">DIAGNÓSTICO RECEBIDO</div>
+  <p class="suc-txt">
+    Suas respostas chegaram. Vou lê-las com atenção antes da sessão.<br><br>
+    <strong>Próximo passo:</strong> aguarde a confirmação de data e horário por e-mail.<br><br>
+    A sessão começa no segundo que a câmera abre — sem aquecimento, direto ao ponto.
+  </p>
+</div>
+
+<div class="form-footer">
+  <p>Método VIPE · Consultoria Individual · <strong>@victhorcn</strong><br>
+  Dúvidas antes da sessão: entre em contato pelo Instagram</p>
+</div>
+
+</div>
+
+<script>
+function selecionar(grupo,el){
+  document.getElementById(grupo).querySelectorAll('.opcao').forEach(o=>o.classList.remove('selecionada'));
+  el.classList.add('selecionada');
+}
+
+function selecionarEscala(el,val){
+  document.querySelectorAll('.escala-opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  const nota=document.getElementById('escala-nota');
+  const notaBaixa=document.getElementById('nota-baixa');
+  const msgs={
+    1:'Honestidade importante. A sessão vai focar em entender o que bloqueia sua disposição.',
+    2:'Entendido. Vamos trabalhar o que está travando antes de montar o protocolo.',
+    3:'Bom ponto de partida. Honestidade aqui já é meio caminho.',
+    4:'Ótimo. Você vai sair da sessão com ações para executar na semana seguinte.',
+    5:'Excelente. Você vai aproveitar ao máximo os 60 minutos.'
+  };
+  nota.style.display='block';
+  nota.innerHTML='<span style="font-size:12px;color:var(--petroleo);font-family:var(--cond);letter-spacing:1px;">'+msgs[val]+'</span>';
+  notaBaixa.style.display=(val<=2)?'block':'none';
+}
+
+function enviar(e){
+  e.preventDefault();
+  document.getElementById('form-vipe').style.display='none';
+  document.getElementById('sucesso').classList.add('ativo');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
